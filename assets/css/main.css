@@ -10,6 +10,9 @@
 		padding: 0;
 		border: 0;
 		font-size: 100%;
+               Little bit overflow problems 
+                box-sizing:border-box;
+
 		font: inherit;
 		vertical-align: baseline;
 	}
