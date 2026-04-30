@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keshav Soni interactive terminal portfolio for Java backend, Spring Boot, AWS, projects, education, publications, and contact details.">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#060707">
+  <title>Keshav Soni | Portfolio</title>
+  <script>
+    (() => {
+      const key = "keshav-appearance";
+      const stored = (() => {
+        try {
+          return localStorage.getItem(key);
+        } catch (_error) {
+          return null;
+        }
+      })();
+      const preference = ["light", "dark"].includes(stored) ? stored : "system";
+      const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const appearance = preference === "system" ? (systemDark ? "dark" : "light") : preference;
+
+      document.documentElement.dataset.appearance = appearance;
+      document.documentElement.dataset.appearancePreference = preference;
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <section class="mode-gate" id="mode-gate" aria-label="Choose portfolio mode">
+    <div class="gate-panel">
+      <div class="gate-head">
+        <p class="eyebrow">choose your experience</p>
+        <div class="appearance-switcher" role="group" aria-label="Color mode preference">
+          <button type="button" data-appearance-choice="system" aria-label="Use system color mode" title="System"><i data-lucide="monitor"></i></button>
+          <button type="button" data-appearance-choice="light" aria-label="Use light mode" title="Light"><i data-lucide="sun"></i></button>
+          <button type="button" data-appearance-choice="dark" aria-label="Use dark mode" title="Dark"><i data-lucide="moon"></i></button>
+        </div>
+      </div>
+      <h1>Keshav Soni</h1>
+      <p class="gate-copy">Explore the same portfolio in a simple visual layout or an interactive terminal shell.</p>
+
+      <div class="mode-options">
+        <button class="mode-card preferred" type="button" data-mode-choice="gui">
+          <span class="mode-icon"><i data-lucide="layout-dashboard"></i></span>
+          <strong>Visual Portfolio</strong>
+          <small>Browse sections, cards, links, and resume like a normal website.</small>
+        </button>
+
+        <button class="mode-card" type="button" data-mode-choice="terminal">
+          <span class="mode-icon"><i data-lucide="terminal"></i></span>
+          <strong>Terminal Portfolio</strong>
+          <small>Type commands like help, projects, skills, contact, and resume.</small>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="app-shell mode-view" id="terminal-view" aria-hidden="true">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Keshav Soni terminal home">
+        <span class="brand-mark">
+          <img src="brand-face.png" alt="" aria-hidden="true">
+        </span>
+        <span>
+          <strong>Keshav Terminal</strong>
+          <small>portfolio shell</small>
+        </span>
+      </a>
+
+      <div class="top-actions" aria-label="Quick commands">
+        <div class="appearance-switcher" role="group" aria-label="Color mode preference">
+          <button type="button" data-appearance-choice="system" aria-label="Use system color mode" title="System"><i data-lucide="monitor"></i></button>
+          <button type="button" data-appearance-choice="light" aria-label="Use light mode" title="Light"><i data-lucide="sun"></i></button>
+          <button type="button" data-appearance-choice="dark" aria-label="Use dark mode" title="Dark"><i data-lucide="moon"></i></button>
+        </div>
+        <button type="button" data-mode-switch="gui"><i data-lucide="layout-dashboard"></i><span>GUI</span></button>
+        <button type="button" data-run="help"><i data-lucide="circle-help"></i><span>help</span></button>
+        <button type="button" data-run="about"><i data-lucide="user"></i><span>about</span></button>
+        <button type="button" data-run="projects"><i data-lucide="folder"></i><span>projects</span></button>
+        <button type="button" data-run="contact"><i data-lucide="send"></i><span>contact</span></button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="terminal-card" aria-label="Interactive terminal">
+        <div class="terminal-titlebar">
+          <div class="window-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p id="window-title">visitor@keshav:~</p>
+          <p id="clock">--:--</p>
+        </div>
+
+        <div class="terminal-screen" id="terminal-screen">
+          <div class="terminal-output" id="terminal-output" aria-live="polite" aria-relevant="additions"></div>
+
+          <form class="command-row" id="command-form" autocomplete="off">
+            <label class="prompt" id="prompt-label" for="command-input">visitor@keshav:~$</label>
+            <input
+              id="command-input"
+              name="command"
+              type="text"
+              inputmode="text"
+              autocapitalize="none"
+              spellcheck="false"
+              aria-label="Type a terminal command"
+              autofocus
+            >
+          </form>
+        </div>
+
+        <footer class="statusbar">
+          <span id="status-path">~/</span>
+          <span><b id="status-count">0</b> commands</span>
+          <span>tab autocomplete</span>
+          <span>up/down history</span>
+        </footer>
+      </section>
+
+      <aside class="manual-card" aria-label="Portfolio command manual">
+        <section class="profile-panel">
+          <p class="eyebrow">terminal portfolio</p>
+          <h1>Keshav Soni</h1>
+          <p>MS Information Technology student at Arizona State University and Java backend developer.</p>
+        </section>
+
+        <section class="manual-section">
+          <h2>Start Here</h2>
+          <div class="command-pills">
+            <button type="button" data-run="about"><i data-lucide="user"></i><span>about</span></button>
+            <button type="button" data-run="skills"><i data-lucide="sparkles"></i><span>skills</span></button>
+            <button type="button" data-run="projects backend"><i data-lucide="folder"></i><span>projects backend</span></button>
+            <button type="button" data-run="neofetch"><i data-lucide="info"></i><span>neofetch</span></button>
+            <button type="button" data-run="publications"><i data-lucide="book-open"></i><span>publications</span></button>
+            <button type="button" data-run="ls"><i data-lucide="list"></i><span>ls</span></button>
+            <button type="button" data-run="cat about.txt"><i data-lucide="file-text"></i><span>cat about.txt</span></button>
+          </div>
+        </section>
+
+        <section class="manual-section">
+          <h2>System</h2>
+          <dl class="system-list">
+            <div>
+              <dt>Status</dt>
+              <dd>Open to Software Engineering / Backend Internship 2026</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>Tempe, AZ - willing to relocate</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>Java, Spring Boot, PostgreSQL, AWS</dd>
+            </div>
+          </dl>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <div class="gui-shell mode-view" id="gui-view" aria-hidden="true">
+    <header class="gui-header">
+      <a class="brand gui-brand" href="#gui-home" aria-label="Keshav Soni visual portfolio home">
+        <span class="brand-mark">
+          <img src="brand-face.png" alt="" aria-hidden="true">
+        </span>
+        <span>
+          <strong>Keshav Soni</strong>
+          <small>backend developer</small>
+        </span>
+      </a>
+
+      <nav class="gui-nav" aria-label="Visual portfolio navigation">
+        <a href="#gui-skills">Skills</a>
+        <a href="#gui-projects">Projects</a>
+        <a href="#gui-experience">Experience</a>
+        <a href="#gui-contact">Contact</a>
+      </nav>
+
+      <div class="gui-actions">
+        <div class="appearance-switcher" role="group" aria-label="Color mode preference">
+          <button type="button" data-appearance-choice="system" aria-label="Use system color mode" title="System"><i data-lucide="monitor"></i></button>
+          <button type="button" data-appearance-choice="light" aria-label="Use light mode" title="Light"><i data-lucide="sun"></i></button>
+          <button type="button" data-appearance-choice="dark" aria-label="Use dark mode" title="Dark"><i data-lucide="moon"></i></button>
+        </div>
+        <button type="button" data-mode-switch="terminal"><i data-lucide="terminal"></i><span>Terminal</span></button>
+        <a id="gui-resume-link" href="Keshav_Soni_Resume.pdf" target="_blank" rel="noreferrer"><i data-lucide="file-text"></i><span>Resume</span></a>
+      </div>
+    </header>
+
+    <main class="gui-main">
+      <section class="gui-hero" id="gui-home">
+        <div class="hero-copy">
+          <p class="eyebrow">software engineering portfolio</p>
+          <h1 id="gui-name">Keshav Soni</h1>
+          <p class="hero-role" id="gui-role">MS Information Technology Student | Java Backend Developer</p>
+          <p id="gui-about-lead"></p>
+
+          <div class="hero-actions">
+            <a href="#gui-projects"><i data-lucide="folder"></i><span>View Projects</span></a>
+            <a href="#gui-contact"><i data-lucide="send"></i><span>Contact</span></a>
+            <button type="button" data-mode-switch="terminal"><i data-lucide="terminal"></i><span>Open Terminal</span></button>
+          </div>
+        </div>
+
+        <aside class="hero-facts" aria-label="Profile facts">
+          <dl id="gui-facts"></dl>
+        </aside>
+      </section>
+
+      <section class="gui-section" id="gui-skills">
+        <div class="section-heading">
+          <p class="eyebrow">skills</p>
+          <h2>Backend, cloud, databases, and product-ready engineering.</h2>
+        </div>
+        <div class="card-grid" id="gui-skills-grid"></div>
+      </section>
+
+      <section class="gui-section" id="gui-projects">
+        <div class="section-heading">
+          <p class="eyebrow">projects</p>
+          <h2>Selected work from professional and academic builds.</h2>
+        </div>
+        <div class="card-grid" id="gui-projects-grid"></div>
+      </section>
+
+      <section class="gui-section" id="gui-experience">
+        <div class="section-heading">
+          <p class="eyebrow">experience</p>
+          <h2>Professional backend development and ownership.</h2>
+        </div>
+        <div class="timeline-grid" id="gui-experience-grid"></div>
+      </section>
+
+      <section class="gui-section" id="gui-education">
+        <div class="section-heading">
+          <p class="eyebrow">education</p>
+          <h2>Graduate study and technical foundation.</h2>
+        </div>
+        <div class="timeline-grid" id="gui-education-grid"></div>
+      </section>
+
+      <section class="gui-section" id="gui-publications">
+        <div class="section-heading">
+          <p class="eyebrow">publications</p>
+          <h2>Research work in computer vision and surveillance systems.</h2>
+        </div>
+        <div class="card-grid" id="gui-publications-grid"></div>
+      </section>
+
+      <section class="gui-contact-section" id="gui-contact">
+        <div>
+          <p class="eyebrow">contact</p>
+          <h2>Open to software engineering and backend internship opportunities.</h2>
+          <p id="gui-contact-copy"></p>
+        </div>
+        <div class="contact-buttons" id="gui-contact-links"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
